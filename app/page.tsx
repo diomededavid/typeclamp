@@ -1,112 +1,114 @@
+'use client'
 import Image from 'next/image'
+import {useForm} from "react-hook-form";
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input"
+import {
+      Select,
+      SelectContent,
+      SelectGroup,
+      SelectItem,
+      SelectTrigger,
+      SelectValue
+} from "@/components/ui/select";
 
+// Common Typographic Scale Ratios:
+// 1.200 — Minor Third
+// 1.067 — Minor Second
+// 1.125 — Major Second
+// 1.200 — Minor Third
+// 1.250 — Major Third
+// 1.333 — Perfect Fourth
+// 1.414 — Augmented Fourth
+// 1.500 — Perfect Fifth
+// 1.618 — The Golden Ratio
+
+const scaleValues = [
+  {id: 1, label: "Minor second", value: "1.067"},
+  {id: 2, label: "Major second", value: "1.125"},
+  {id: 3, label: "Minor third", value: "1.200"},
+  {id: 4, label: "Major third", value: "1.250"},
+  {id: 5, label: "Perfect fourth", value: "1.333"},
+  {id: 6, label: "Augmented fourth", value: "1.414"},
+  {id: 7, label: "Perfect Fifth", value: "1.500 "},
+  {id: 8, label: "Minor Sixth", value: "minorSixth"},
+  {id: 9, label: "Golden Ratio", value: "1.618"},
+  {id: 10, label: "Major sixth", value: "majorSixth"},
+  {id: 11, label: "Minor seventh", value: "minorSeventh"},
+  {id: 12, label: "Major seventh", value: "majorSeventh"},
+  {id: 13, label: "Octave", value: "octave"},
+  {id: 14, label: "Custom", value: "custom"},
+];
+
+//  Resource https://medium.com/sketch-app-sources/exploring-responsive-type-scales-cf1da541be54
 export default function Home() {
+  const {register} = useForm()
+  // @ts-ignore
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main className="grid grid-cols-12 gap-4 m-4">
+      <div className="col-span-12 p-4">
+        <h1>TypeClamp</h1>
+      </div>
+      <div className="col-span-12 md:col-span-3 p-4">
+        <form className="flex flex-col gap-4">
+          <Label htmlFor="base">Base (px)</Label>
+          <Input {...register("base")} placeholder="Base (px)" id="base" />
+            <Label htmlFor="base">Scale</Label>
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a Scale" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                  {scaleValues.map(({value, label, id}) => {
+                      return (
+                          <SelectItem value={value} key={id}>{label}</SelectItem>
+                      );
+                    })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+            <Label htmlFor="base">Font</Label>
+            <Select>
+                <SelectTrigger className="max-w-full">
+                    <SelectValue placeholder="Select a Font" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                        {scaleValues.map(({value, label, id}) => {
+                            return (
+                                <SelectItem value={value} key={id}>{label}</SelectItem>
+                            );
+                        })}
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
+            <Label htmlFor="base">Font Weight</Label>
+            <Select>
+                <SelectTrigger className="max-w-full">
+                    <SelectValue placeholder="Select a Font" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                        {scaleValues.map(({value, label, id}) => {
+                            return (
+                                <SelectItem value={value} key={id}>{label}</SelectItem>
+                            );
+                        })}
+                    </SelectGroup>
+                </SelectContent>
+            </Select>
+        </form>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="col-span-12 md:col-span-6">
+          Typography Scale Goes Here
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="col-span-12 md:col-span-3">
+       <code>
+            Some code stuffs goes here
+       </code>
       </div>
     </main>
   )
