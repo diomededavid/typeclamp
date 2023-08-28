@@ -1,6 +1,6 @@
 {
   "run": "npm run dev",
-  "include": ["src"],
+  "include": ["app", "components"],
   "run_prettier": true,
   "web_server_url": "http://localhost:3000",
   "main_branch": "mightymeld"
