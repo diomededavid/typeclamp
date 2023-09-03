@@ -1,6 +1,5 @@
 'use client'
 import {useState} from "react";
-import {useForm} from "react-hook-form";
 import {Input} from "@/components/ui/input"
 
 
@@ -34,10 +33,26 @@ const scaleValues = [
 
 //  Resource https://medium.com/sketch-app-sources/exploring-responsive-type-scales-cf1da541be54
 export default function Home() {
-    const {register} = useForm()
     const [form, setForm] = useState({
         base: 16,
     });
+
+    // @ts-ignore
+    const handleFormChange = (event) => {
+        // Clone form because we need to modify it
+        const updatedForm = {...form};
+
+        // Get the name of the field that caused this change event
+        // Get the new value of this field
+        // Assign new value to the appropriate form field
+        // @ts-ignore
+        updatedForm[event.target.name] = event.target.value;
+
+        console.log('Form changed: ', updatedForm);
+
+        // Update state
+        setForm(updatedForm);
+    };
 
     return (
         <main className="grid grid-cols-12 gap-4 m-4">
@@ -47,7 +62,10 @@ export default function Home() {
             <div className="col-span-12 md:col-span-3 p-4">
                 <form className="flex flex-col gap-4">
                     {/*// @ts-ignore*/}
-                    <Input id="base" placeholder="Base (px)" type="number" label="Base (px)" name="Base" value={form.base}/>
+                    <Input id="base" label="Last Name"
+                           name="lastName"
+                           value={form.base}
+                           onChange={handleFormChange} />
                 </form>
             </div>
 
