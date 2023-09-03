@@ -47,7 +47,7 @@ export default function Home() {
             <div className="col-span-12 md:col-span-3 p-4">
                 <form className="flex flex-col gap-4">
                     {/*// @ts-ignore*/}
-                    <Input id="base" placeholder="Base (px)" type="number" label="Base (px)" name="Base" initalValue={form.base}/>
+                    <Input id="base" placeholder="Base (px)" type="number" label="Base (px)" name="Base" value={form.base}/>
                 </form>
             </div>
 
